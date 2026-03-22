@@ -1,14 +1,16 @@
 -- Create the application database user (non-superuser) for RLS enforcement.
 -- This script runs automatically on first `docker compose up` via
 -- PostgreSQL's /docker-entrypoint-initdb.d/ mechanism.
-
 -- The database itself (crm_db) is created by POSTGRES_DB env var.
 -- We just need to create the app user and grant privileges.
+
+-- Read password from DBPASSWORD env var
+\set db_pass `echo "$DBPASSWORD"`
 
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'crm_user') THEN
-        CREATE ROLE crm_user WITH LOGIN PASSWORD 'crm_password';
+        CREATE ROLE crm_user WITH LOGIN PASSWORD :'db_pass';
     END IF;
 END
 $$;
