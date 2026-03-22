@@ -68,7 +68,7 @@ services:
       dockerfile: Dockerfile
     env_file: .env.docker
     expose:
-      - "5173"
+      - "3000"
 
 volumes:
   postgres_data:
