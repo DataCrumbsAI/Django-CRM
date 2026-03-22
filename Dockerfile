@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgdk-pixbuf2.0-0 \
     libffi-dev \
     shared-mime-info \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -20,7 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ .
 
-# --- ADD THIS LINE ---
 COPY docker/backend/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
