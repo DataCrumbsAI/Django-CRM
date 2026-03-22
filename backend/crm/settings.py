@@ -260,6 +260,7 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Open source CRM application",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "COMPONENT_SPLIT_REQUEST": True,
     "PREPROCESSING_HOOKS": ["common.custom_openapi.preprocessing_filter_spec"],
     "ENUM_NAME_OVERRIDES": {
