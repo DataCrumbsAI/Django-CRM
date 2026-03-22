@@ -311,6 +311,9 @@ CORS_ALLOWED_ORIGINS = [
 _csrf_origins = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf_origins.split(",") if o.strip()]
 
+# Trust X-Forwarded-Proto from reverse proxy (Cloudflare/Traefik)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # Security: HSTS with 1 year duration (recommended minimum)
 SECURE_HSTS_SECONDS = 31536000  # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
