@@ -14,5 +14,10 @@ export default defineConfig(({ mode }) => {
       },
       autoUploadSourceMaps: !!env.PUBLIC_SENTRY_DSN
     }), tailwindcss(), sveltekit()],
+    server: {
+      host: '0.0.0.0',
+      port: 5173,
+      allowedHosts: ['django.datacrumbs.hr'],
+    },
   };
 });
