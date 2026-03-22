@@ -1,10 +1,8 @@
 FROM python:3.12-slim-bookworm
 
-# Prevent Python from buffering stdout/stderr (useful for Docker logs)
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Install system dependencies for WeasyPrint (cairo, pango) and PostgreSQL
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libcairo2 \
@@ -17,11 +15,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Install Python dependencies (layer cached)
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend source
 COPY backend/ .
+
+# --- ADD THIS LINE ---
+COPY docker/backend/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 8000
